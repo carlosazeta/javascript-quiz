@@ -10,22 +10,28 @@ import {
 	CardHeader,
 	CardTitle,
 } from './components/ui/card'
+
 import {
 	Pagination,
 	PaginationContent,
+	PaginationEllipsis,
 	PaginationItem,
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
 } from '@/components/ui/pagination'
+
 import { Button } from './components/ui/button'
 
 const getBackgroundColor = (info: QuestionType, index: number) => {
 	const { userSelectedAnswer, correctAnswer } = info
 
 	if (userSelectedAnswer === null) return 'bg-black'
+
 	if (index !== correctAnswer && index !== userSelectedAnswer) return 'bg-black'
+
 	if (index === correctAnswer) return 'bg-green-400'
+
 	if (index === userSelectedAnswer) return 'bg-red-400'
 
 	return 'bg-black'
@@ -68,13 +74,15 @@ const Question = ({ info }: { info: QuestionType }) => {
 export const Game = () => {
 	const questions = useQuestionsStore((state) => state.questions)
 	const currentQuestion = useQuestionsStore((state) => state.currentQuestion)
+
 	const goNextQuestion = useQuestionsStore((state) => state.goNextQuestion)
 	const goPreviousQuestion = useQuestionsStore(
 		(state) => state.goPreviousQuestion
 	)
+
 	const questionInfo = questions[currentQuestion]
 
-	const disableNavigation =
+	const disableNavegation =
 		'text-slate-200 hover:text-slate-200 hover:bg-transparent cursor-not-allowed'
 
 	return (
@@ -86,7 +94,7 @@ export const Game = () => {
 						<PaginationPrevious
 							onClick={goPreviousQuestion}
 							className={`cursor-pointer ${
-								currentQuestion === 0 ? disableNavigation : ''
+								currentQuestion === 0 && disableNavegation
 							}`}
 						/>
 					</PaginationItem>
@@ -97,7 +105,7 @@ export const Game = () => {
 						<PaginationNext
 							onClick={goNextQuestion}
 							className={`cursor-pointer ${
-								currentQuestion >= questions.length - 1 ? disableNavigation : ''
+								currentQuestion > questions.length - 2 && disableNavegation
 							}`}
 						/>
 					</PaginationItem>
