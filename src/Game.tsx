@@ -2,14 +2,15 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { useQuestionsStore } from './store/questions'
 import { type Question as QuestionType } from './types'
+import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'
+
 import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from './components/ui/card'
+	Pagination,
+	PaginationContent,
+	PaginationItem,
+	PaginationNext,
+	PaginationPrevious,
+} from '@/components/ui/pagination'
 
 import {
 	Pagination,
