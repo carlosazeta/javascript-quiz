@@ -12,16 +12,6 @@ import {
 	PaginationPrevious,
 } from '@/components/ui/pagination'
 
-import {
-	Pagination,
-	PaginationContent,
-	PaginationEllipsis,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious,
-} from '@/components/ui/pagination'
-
 import { Button } from './components/ui/button'
 
 const getBackgroundColor = (info: QuestionType, index: number) => {
