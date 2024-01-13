@@ -14,6 +14,7 @@ import {
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 
 const Question = ({ info }: { info: QuestionType }) => {
+	const selectAnswer = useQuestionsStore((state) => state.selectAnswer)
 	return (
 		<Card>
 			<CardHeader>
