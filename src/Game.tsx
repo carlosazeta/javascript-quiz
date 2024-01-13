@@ -11,7 +11,21 @@ import {
 	CardTitle,
 } from './components/ui/card'
 
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { Button } from './components/ui/button'
+
+const getBackgroundColor = (info: QuestionType, index: number) => {
+	const { userSelectedAnswer, correctAnswer } = info
+
+	if (userSelectedAnswer === null) return 'bg-black'
+
+	if (index !== correctAnswer && index !== userSelectedAnswer) return 'bg-black'
+
+	if (index === correctAnswer) return 'bg-green-400'
+
+	if (index === userSelectedAnswer) return 'bg-red-400'
+
+	return 'bg-black'
+}
 
 const Question = ({ info }: { info: QuestionType }) => {
 	const selectAnswer = useQuestionsStore((state) => state.selectAnswer)
@@ -30,22 +44,18 @@ const Question = ({ info }: { info: QuestionType }) => {
 					{info.code}
 				</SyntaxHighlighter>
 
-				<ToggleGroup
-					type='multiple'
-					variant='outline'
-					className='flex flex-col mt-6'
-				>
+				<ul className='flex flex-col mt-6'>
 					{info.answers.map((answer, index) => (
-						<ToggleGroupItem
+						<Button
 							key={index}
-							value={answer}
+							disabled={info.userSelectedAnswer !== null}
 							onClick={createHandleClick(index)}
-							className='my-2'
+							className={`my-2 ${getBackgroundColor(info, index)}`}
 						>
 							{answer}
-						</ToggleGroupItem>
+						</Button>
 					))}
-				</ToggleGroup>
+				</ul>
 			</CardContent>
 		</Card>
 	)

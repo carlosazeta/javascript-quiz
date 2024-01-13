@@ -17,7 +17,13 @@ export const useQuestionsStore = create<State>((set, get) => {
 			const res = await fetch('http://localhost:5173/data.json')
 			const json = await res.json()
 
-			const questions = json.sort(() => Math.random() - 0.5).slice(0, limit)
+			const questions = json
+				.sort(() => Math.random() - 0.5)
+				.slice(0, limit)
+				.map((question: Question) => ({
+					...question,
+					userSelectedAnswer: null, // Asegurar que cada pregunta tenga esta propiedad inicializada
+				}))
 			set({ questions })
 		},
 
