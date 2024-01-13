@@ -15,6 +15,11 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 
 const Question = ({ info }: { info: QuestionType }) => {
 	const selectAnswer = useQuestionsStore((state) => state.selectAnswer)
+
+	const createHandleClick = (answerIndex: number) => () => {
+		selectAnswer(info.id, answerIndex)
+	}
+
 	return (
 		<Card>
 			<CardHeader>
@@ -31,7 +36,12 @@ const Question = ({ info }: { info: QuestionType }) => {
 					className='flex flex-col mt-6'
 				>
 					{info.answers.map((answer, index) => (
-						<ToggleGroupItem key={index} value={answer} className='my-2'>
+						<ToggleGroupItem
+							key={index}
+							value={answer}
+							onClick={createHandleClick(index)}
+							className='my-2'
+						>
 							{answer}
 						</ToggleGroupItem>
 					))}
