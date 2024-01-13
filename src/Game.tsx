@@ -11,6 +11,16 @@ import {
 	CardTitle,
 } from './components/ui/card'
 
+import {
+	Pagination,
+	PaginationContent,
+	PaginationEllipsis,
+	PaginationItem,
+	PaginationLink,
+	PaginationNext,
+	PaginationPrevious,
+} from '@/components/ui/pagination'
+
 import { Button } from './components/ui/button'
 
 const getBackgroundColor = (info: QuestionType, index: number) => {
@@ -71,9 +81,36 @@ export const Game = () => {
 	)
 
 	const questionInfo = questions[currentQuestion]
+
+	const disableNavegation =
+		'text-slate-200 hover:text-slate-200 hover:bg-transparent cursor-not-allowed'
+
 	return (
 		<>
 			<Question info={questionInfo} />
+			<Pagination>
+				<PaginationContent>
+					<PaginationItem>
+						<PaginationPrevious
+							onClick={goPreviousQuestion}
+							className={`cursor-pointer ${
+								currentQuestion === 0 && disableNavegation
+							}`}
+						/>
+					</PaginationItem>
+					<PaginationItem>
+						{currentQuestion + 1} / {questions.length}
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationNext
+							onClick={goNextQuestion}
+							className={`cursor-pointer ${
+								currentQuestion > questions.length - 2 && disableNavegation
+							}`}
+						/>
+					</PaginationItem>
+				</PaginationContent>
+			</Pagination>
 		</>
 	)
 }
